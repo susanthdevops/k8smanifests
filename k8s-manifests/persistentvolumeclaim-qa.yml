@@ -4,11 +4,9 @@ metadata:
   namespace: qa
   name: gcp-nginx-pvc
 spec:
-  volumeMode: Filesystem
-  volumeName: nginx-volume
-  storageClassName: kubernetes.io/gce-pd
+  storageClassName: storageclass-qa-nginx
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   resources:
     requests:
       storage: 50Gi

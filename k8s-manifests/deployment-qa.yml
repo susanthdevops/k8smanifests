@@ -21,12 +21,12 @@ spec:
       - name: nginx
         image: nginx
         ports:
-        - name: nginx-container-port
+        - name: nginx-cont-port
           containerPort: 80
           protocol: TCP
         envFrom:
-        - configMapRef:
-          name: nginx-configmap
+        - configMapRef: 
+            name: nginx-configmap
         volumeMounts:
         - name: nginx-volume
           mountPath: /tmp/nginx
