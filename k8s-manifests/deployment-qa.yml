@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: qa
+  name: nginx-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      name: nginx-pod
+      namespace: qa
+      labels:
+        app: nginx
+    spec: 
+      automountServiceAccountToken: false
+      serviceAccountName: sa-qa
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - name: nginx-container-port
+          containerPort: 80
+          protocol: TCP
+        envFrom:
+        - configMapRef:
+          name: nginx-configmap
+        volumeMounts:
+        - name: nginx-volume
+          mountPath: /tmp/nginx
+      volumes:
+      - name: nginx-volume
+        persistentVolumeClaim:
+          claimName: gcp-nginx-pvc
+

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: qa
+  name: gcp-nginx-pvc
+spec:
+  volumeMode: Filesystem
+  volumeName: nginx-volume
+  storageClassName: kubernetes.io/gce-pd
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 50Gi
